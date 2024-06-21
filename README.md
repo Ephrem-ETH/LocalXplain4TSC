@@ -1,6 +1,6 @@
 # Interpreting Black-Box Time Series Classifiers using Parameterised Event Primitives
 
-We propose LOcal Model Agnostic Time series Classification Explanation (LOMATCE, pronounced "lom-te-see"), a method akin to LIME [1], to explain deep-learning-based time series classifiers. LOMATCE uses parametrized event primitives (PEPs) to extract and parameterize events like increasing trends, decreasing trends, local maxima, and local minima from time series data. These PEPs capture temporal patterns, enhancing interpretability and facilitating the training of simple, interpretable models like linear regression [2]. Discussing time series in terms of these familiar events makes the explanations more intuitive and comprehensible.
+We propose LOcal Model Agnostic Time series Classification Explanation (LOMATCE, pronounced "lom-te-see"), a method akin to LIME [1], to explain deep-learning-based time series classifiers. LOMATCE uses parametrized event primitives (PEPs) to extract and parameterize events like increasing trends, decreasing trends, local maxima, and local minima from time series data. These PEPs capture temporal patterns, and facilitating the training of simple, interpretable models like linear regression [2]. Discussing time series in terms of these familiar events makes the explanations more intuitive and comprehensible.
 
 ## File description
 
@@ -14,7 +14,11 @@ We propose LOcal Model Agnostic Time series Classification Explanation (LOMATCE,
 
 ## Method Design
 
-<img src="design\lomatce_design.png" alt="Method Design Diagram" width="100%" />
+<!-- <img src="design\lomatce_design.png" alt="Method Design Diagram" width="100%" /> -->
+
+![center w:15in](./design\lomatce_design.png)
+
+**Fig 1:** The proposed XAI method for DL based time series classifiers using Parameterised Event Primitives (PEPs).
 
 ## Result
 
@@ -26,7 +30,7 @@ We propose LOcal Model Agnostic Time series Classification Explanation (LOMATCE,
 | **GunPoint** | $0.72 \pm 0.02$ | $0.52 \pm 0.03$ | $0.75 \pm 0.08$ | $0.75 \pm 0.08$ |
 
 ![center w:13.5in](./design/important_features_line_plot.png)
-**Fig 4A:** Explanation highlights segment significance, relevance scores, and event types (e.g., increasing, decreasing, maxima, minima).
+**Fig 2:** Explanation highlights segment significance, relevance scores, and event types (e.g., increasing, decreasing, maxima, minima).
 
 ## Usage
 
