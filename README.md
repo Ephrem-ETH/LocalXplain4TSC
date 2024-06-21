@@ -16,7 +16,7 @@ We propose LOcal Model Agnostic Time series Classification Explanation (LOMATCE,
 
 <!-- <img src="design\lomatce_design.png" alt="Method Design Diagram" width="100%" /> -->
 
-![center w:15in](./design/lomatce_design.png)
+![center w:13in](./design/lomatce_design.png)
 
 **Fig 1:** The proposed XAI method for deep learning based time series classifiers using Parameterised Event Primitives (PEPs).
 
@@ -29,7 +29,7 @@ We propose LOcal Model Agnostic Time series Classification Explanation (LOMATCE,
 |   **ECG**    | $0.82 \pm 0.02$ | $0.70 \pm 0.02$ | $0.81 \pm 0.01$ | $0.54 \pm 0.10$ |
 | **GunPoint** | $0.72 \pm 0.02$ | $0.52 \pm 0.03$ | $0.75 \pm 0.08$ | $0.75 \pm 0.08$ |
 
-![center w:13.5in](./design/important_features_line_plot.png)
+![center w:13in](./design/important_features_line_plot.png)
 **Fig 2:** Explanation highlights segment significance, relevance scores, and event types (e.g., increasing, decreasing, maxima, minima).
 
 ## Usage
