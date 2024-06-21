@@ -1,44 +1,5 @@
 import sklearn.metrics as skm
 import numpy as np
-
-def fidelity(lstm_preds, tree_preds):
-
-  fidelity = skm.accuracy_score(lstm_preds, tree_preds)
-  print(f"Fidelity: {fidelity:.3f}")
-  return fidelity
-
-def tree_node_depth(decision_tree):
-  # Compute the interpretability metric
-  depth = decision_tree.tree_.max_depth
-  n_nodes = decision_tree.tree_.node_count
-  print(f"Depth: {depth}")
-  print(f"Number of nodes: {n_nodes}")
-  
-  return depth, n_nodes
-  
-  
-def objective_evaluation(tree_model, lstm_preds, tree_preds):
-  # Compute fidelity and tree node depth
-  fidelity_score = fidelity(lstm_preds, tree_preds)
-  depth, n_nodes = tree_node_depth(tree_model)
-  
-  return fidelity_score, depth, n_nodes
-
-def compute_fidelity_accuracy(black_box_model, surrogate_model, true_labels, lime_explanations):
-    # Obtain predictions from the black-box model and the surrogate model
-    black_box_predictions = black_box_model.predict(lime_explanations)
-    surrogate_predictions = surrogate_model.predict(lime_explanations)
-
-    # Compute accuracy of the black-box model
-    accuracy_black_box = skm.accuracy_score(true_labels, black_box_predictions)
-
-    # Compute accuracy of the surrogate model
-    accuracy_surrogate = skm.accuracy_score(true_labels, surrogate_predictions)
-
-    # Compute fidelity of the surrogate model
-    fidelity = skm.accuracy_score(black_box_predictions, surrogate_predictions)
-
-    return accuracy_black_box, accuracy_surrogate, fidelity
   
 
 def performance_decrease(model, test_data, replacement_method, important_timesteps):

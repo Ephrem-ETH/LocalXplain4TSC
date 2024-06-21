@@ -1,90 +1,50 @@
-# A Global Model-Agnostic Rule-Based XAI Method based on Parameterised Event Primitives for Time Series Classifiers
+# Interpreting Black-Box Time Series Classifiers using Parameterised Event Primitives
 
-
-Introducing a new global model agnostic rule-based XAI method tailored for deep learning based time series classifiers. While there is a plethora of eXplainable AI (XAI) methods designed to elucidate the functioning of models trained on image and tabular data, adapting these methods for explaining deep learning-based time series classifiers may not be straightforward due to the temporal nature of time series data. The temporal nature of time series data adds complexity, necessitating a specialized approach.
-
-Our project addresses this challenge with a novel methodology tailored for deep learning time series classifiers. The primary objective of this project is to offer a clear and interpretable understanding of deep learning-based time series classifiers while maintaining the temporal relationship in the sequence. The proposed solution aims to generate decision trees as explanations, providing insights that are comprehensible for human interpretation.
-
-<!-- Introducing a novel global model-agnostic XAI method for deep learning-based time series classifiers. Adapting existing methods for this context poses challenges due to the temporal nature of time series data. Our project addresses this with a specialized approach, aiming to offer clear, interpretable insights. The primary objective is to generate decision trees as explanations, enhancing transparency for human interpretation. -->
+We propose LOcal Model Agnostic Time series Classification Explanation (LOMATCE, pronounced "lom-te-see"), a method akin to LIME [1], to explain deep-learning-based time series classifiers. LOMATCE uses parametrized event primitives (PEPs) to extract and parameterize events like increasing trends, decreasing trends, local maxima, and local minima from time series data. These PEPs capture temporal patterns, enhancing interpretability and facilitating the training of simple, interpretable models like linear regression [2]. Discussing time series in terms of these familiar events makes the explanations more intuitive and comprehensible.
 
 ## File description
 
- - experiments: This directory contains code files and results.
+- experiments: This directory contains code files and results.
 
-    - results: Includes experiment results for each dataset.
+  - results: Includes experiment results for each dataset.
 
-        - output.log: This file contains the objective evaluation of the method for each dataset and model type.
+    - output.log:This file contains the fidelity scores for each dataset and perturbation strategy.
 
-        * Example: Evaluation result for FCN model architecture trained on the ECG dataset can be found at `experiments\results\simulation\ecg200\fcn--2024-01-08_16-01-07\output.log.`
+    * Example: Evaluation result for FCN model architecture trained on the ECG dataset and zero perturbation strategy can be found at `experiments\results\simulation\ecg200\fcn-zero--2024-04-22_22-04-47\output.log.`
 
+## Method Design
 
-    
-
-
-
-## Method Design 
-
-<img src="design\globXplain_V2.1-1.png" alt="Method Design Diagram" width="70%" />
-
-
-## Objective Evaluation Metrics
-
-#### Table 1. Objective Evaluation Metrics for Rule-Based Explanation
-
-| Metric     | Definition                                            | Formula                                     |
-|------------|-------------------------------------------------------|---------------------------------------------|
-| Accuracy   | Proportion of correctly predicted instances (c) out of the total instances (N) | A = c / N                                   |
-| Fidelity   | Ratio of input instances where the surrogate model agrees (a) with the actual model, divided by the total number of instances (N) | F = a / N                                   |
-| Complexity | The complexity or simplicity of the generated explanation is measured by the number of nodes and depth | C = #Depth, #Nodes                          |
-| Robustness  | The persistence of methods to withstand small perturbations (δ) of the input that does not change the prediction of the model | R = Σ[g(x_n)=g(x_n+δ)] / N                  |
-
+<img src="design\lomatce_design.png" alt="Method Design Diagram" width="100%" />
 
 ## Result
 
-#### Table 4. Mean and standard deviation of the objective evaluation of the rule-based explanation for LSTM-FCN model
+##### Table **1**: Explanation faithfulness, with 95% confidence interval, across various perturbation methods.
 
+|   Dataset    |      Zero       |      Mean       |   Total_mean    |     Random      |
+| :----------: | :-------------: | :-------------: | :-------------: | :-------------: |
+|   **ECG**    | $0.82 \pm 0.02$ | $0.70 \pm 0.02$ | $0.81 \pm 0.01$ | $0.54 \pm 0.10$ |
+| **GunPoint** | $0.72 \pm 0.02$ | $0.52 \pm 0.03$ | $0.75 \pm 0.08$ | $0.75 \pm 0.08$ |
 
-
-| Dataset   | Acc      | Fidelity | #Depth | #Node | Rob. |
-|---------|----------|----------|--------|-------|------|
-| ECG200  | 0.80±0.12 | 0.89±0.06 | 4±2 | 10±5 | 0.76±0.14 |
-| GunPoint| 0.73±0.11 | 0.88±0.07 | 4±2 | 12±5 | 0.64±0.17 |
-| FordA   | 0.79±0.04 | 0.84±0.05 | 8±4 | 41±38| 0.77±0.05 |
-| FordB   | 0.81±0.04 | 0.86±0.05 | 7±4 | 37±33| 0.79±0.08 |
-
-
-#### Table 4. Mean and standard deviation of the objective evaluation of the rule-based explanation for FCN model
-
-
-
-| Dataset        | Acc | Fidelity | #Depth | #Node | Rob. |
-|---------|-----|----------|--------|-------|------|
-| ECG200  | 0.79±0.10 | 0.89±0.06 | 3±2 | 10±6 | 0.78±0.12 |
-| GunPoint| 0.74±0.12 | 0.88±0.11 | 4±2 | 12±5 | 0.64±0.18 |
-| FordA   | 0.78±0.03 | 0.84±0.04 | 8±3 | 42±34| 0.76±0.04 |
-| FordB   | 0.81±0.04 | 0.87±0.05 | 8±4 | 42±34| 0.77±0.06 |
-
+![center w:13.5in](./design/important_features_line_plot.png)
+**Fig 4A:** Explanation highlights segment significance, relevance scores, and event types (e.g., increasing, decreasing, maxima, minima).
 
 ## Usage
 
 To run the the simulation of the experiment, use the following command:
 
+- For FCN model
 
-
-* For FCN model
 ```
 python fcn_simulation --dataset [dataset-name] --num_runs [100 ]  --class_labels [list of the class names]
 ```
 
+## Requirments
 
-* For LSTM-FCN model
-```
-python lstm_fcn_simulation --dataset [dataset-name] --num_runs [100 ] --class_labels [list of the class names]
-```
+- tsai (State-of-the-art Deep Learning library for Time Series and Sequences)
+- python >= 3.8
+- pytorch
 
+## References
 
-
-## Requirments 
-
-
-
+- [1] [" Why Should I Trust You?" (Ribeiro 2016)](https://dl.acm.org/doi/abs/10.1145/2939672.2939778)
+- [2] [Learning Comprehensible Descriptions of Multivariate Time Series (Kadous, 1999)](https://www.researchgate.net/profile/Mohammed-Kadous/publication/2300384_Learning_Comprehensible_Descriptions_of_Multivariate_Time_Series/links/0c960523afe0537bb7000000/Learning-Comprehensible-Descriptions-of-Multivariate-Time-Series.pdf)
