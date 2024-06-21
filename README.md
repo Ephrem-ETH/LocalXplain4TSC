@@ -16,9 +16,9 @@ We propose LOcal Model Agnostic Time series Classification Explanation (LOMATCE,
 
 <!-- <img src="design\lomatce_design.png" alt="Method Design Diagram" width="100%" /> -->
 
-![center w:15in](./design\lomatce_design.png)
+![center w:15in](./design/lomatce_design.png)
 
-**Fig 1:** The proposed XAI method for DL based time series classifiers using Parameterised Event Primitives (PEPs).
+**Fig 1:** The proposed XAI method for deep learning based time series classifiers using Parameterised Event Primitives (PEPs).
 
 ## Result
 
