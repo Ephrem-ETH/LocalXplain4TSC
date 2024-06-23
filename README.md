@@ -13,12 +13,13 @@ We propose LOcal Model Agnostic Time series Classification Explanation (LOMATCE,
     * Example: Evaluation result for FCN model architecture trained on the ECG dataset and zero perturbation strategy can be found at `experiments\results\simulation\ecg200\fcn-zero--2024-04-22_22-04-47\output.log.`
 
   - **utils**: Contains utility files:
+
     - `helper_class.py`: Functions for clustering, explanation plots, etc.
     - `test_dataloader.py`: Dataloader for the test set.
 
-- `fcn_simulation.py`: Runs the FCN model multiple times with random train-test splits to ensure robustness of results.
-- `globXplain.py`: Core method implementation, from PEP extraction to applying interpretable models like linear regression to mimic deep learning inference.
-- `perturbation.py`: Applies various perturbation strategies and generates neighboring samples.
+  - `fcn_simulation.py`: Runs the FCN model multiple times with random train-test splits to ensure robustness of results.
+  - `globXplain.py`: Core method implementation, from PEP extraction to applying interpretable models like linear regression to mimic deep learning inference.
+  - `perturbation.py`: Applies various perturbation strategies and generates neighboring samples.
 
 ## Method Design
 
