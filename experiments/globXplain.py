@@ -30,7 +30,6 @@ class GlobXplain4TSC:
     self.base_dir= base_dir
     self.helper_instance = HelperClass(base_dir=base_dir) 
 
-  # Turn the data of 2D shape into 3D
   def preprocessing_data(self, X):
     print(f'Shape of data : {X.shape}')
 
